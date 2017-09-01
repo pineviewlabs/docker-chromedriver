@@ -32,3 +32,21 @@ docker run --name chromedriver -p 127.0.0.1::4444 robcherry/docker-chromedriver:
 ```
 docker run --name chromedriver -p 127.0.0.1::4444 -e CHROMEDRIVER_WHITELISTED_IPS='' robcherry/docker-chromedriver:latest
 ```
+
+### Environment variables
+
+| Variable      | Description   | Default | 
+| ------------- |---------------| ---------|
+| `CHROMEDRIVER_WHITELISTED_IPS` | list if comma separated IPs or `''` to allow all | 127.0.0.1 |
+| `CHROMEDRIVER_VERBOSE` | `--verbose` to run chromedriver in verbose mode | empty |
+| `CHROMEDRIVER_PORT` | port number to run chromedriver on | 4444 |
+| `SCREEN_GEOMETRY` | screen resolution settings for `Xvfb` | `"1440x900x24"` |
+
+
+### Verbose Logging
+
+You need to pass `--priviledged=true` otherwise Chrome won't start
+
+```sh
+$ docker run --name chromedriver -P -d -e CHROMEDRIVER_WHITELISTED_IPS='' -e CHROMEDRIVER_VERBOSE='--verbose' --privileged=true chromedriver:latest
+ ```
