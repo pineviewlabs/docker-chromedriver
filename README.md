@@ -18,7 +18,7 @@ docker build -t robcherry/docker-chromedriver:latest .
 The most basic usage is to run the container and expose the ChromeDriver port on all interfaces.
 
 ```
-  robcherry/docker-chromedriver:latest
+docker run --name chromedriver -P -d robcherry/docker-chromedriver:latest
 ```
 
 If you want to restrict the ports to your local environment, you can do so using `-p`.
