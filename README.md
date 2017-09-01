@@ -50,3 +50,7 @@ You need to pass `--priviledged=true` otherwise Chrome won't start
 ```sh
 $ docker run --name chromedriver -P -d -e CHROMEDRIVER_WHITELISTED_IPS='' -e CHROMEDRIVER_VERBOSE='--verbose' --privileged=true chromedriver:latest
  ```
+ 
+### Viewing the Logs
+
+Chromedriver logs can be found in `/var/log/supervisor/chromedriver.log`
