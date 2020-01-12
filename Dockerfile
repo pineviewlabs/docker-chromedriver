@@ -37,7 +37,7 @@ RUN apt-get -yqq update && \
 RUN curl -sS -o - https://bootstrap.pypa.io/ez_setup.py | python && \
     easy_install -q supervisor
 
-ARG CHROMEDRIVER_VERSION=75.0.3770.90
+ARG CHROMEDRIVER_VERSION=79.0.3945.36
 
 # Install Chrome WebDriver
 RUN mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION && \
