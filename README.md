@@ -2,8 +2,9 @@
 
 Includes
 
-* ChromeDriver (Latest)
+* ChromeDriver (79)
 * Google Chrome (Latest Stable)
+* Xvfb
 
 ## Building the Docker Image
 
