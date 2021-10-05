@@ -38,7 +38,7 @@ RUN apt-get -yqq update && \
 # Install Supervisor
 RUN pip install supervisor
 
-ARG CHROMEDRIVER_VERSION=79.0.3945.36
+ARG CHROMEDRIVER_VERSION=94.0.4606.41
 
 # Install Chrome WebDriver
 RUN mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION && \
