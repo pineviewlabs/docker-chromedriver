@@ -31,11 +31,11 @@ RUN apt-get -yqq update && \
     apt-get -yqq install fonts-liberation libcairo2 libnss3 libnspr4 libasound2 libcups2 libxcomposite1 libxrender1 libxss1 lsb-release xdg-utils libappindicator3-1  && \
     apt-get -yqq install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic && \
     apt-get -yqq install python && \
+    apt-get -yqq install python-pip && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Supervisor
-RUN curl -sS -o - https://bootstrap.pypa.io/ez_setup.py | python && \
-    easy_install -q supervisor
+RUN pip install -q supervisor
 
 ARG CHROMEDRIVER_VERSION=79.0.3945.36
 
