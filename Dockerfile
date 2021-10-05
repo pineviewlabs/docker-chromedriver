@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -26,16 +26,17 @@ RUN useradd automation --shell /bin/bash --create-home
 # Install Python
 RUN apt-get -yqq update && \
     apt-get -yqq install wget curl unzip && \
-    apt-get -yqq install xvfb tinywm && \
+    apt-get -yqq install xvfb && \
     apt-get -yqq install gnupg libxi6 libgconf-2-4 && \
-    apt-get -yqq install fonts-liberation libcairo2 libnss3 libnspr4 libasound2 libcups2 libxcomposite1 libxrender1 libxss1 lsb-release xdg-utils libappindicator3-1  && \
+    apt-get -yqq install fonts-liberation libcairo2 libnss3 libnspr4 libasound2 libcups2 libxcomposite1 libxrender1 libxss1 lsb-release xdg-utils && \
     apt-get -yqq install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic && \
-    apt-get -yqq install python && \
-    apt-get -yqq install python-pip && \
+    apt-get -yqq install python3 && \
+    apt-get -yqq install python3-pip && \
+    apt-get -yqq install openssh-server && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Supervisor
-RUN pip install -q supervisor
+RUN pip install supervisor
 
 ARG CHROMEDRIVER_VERSION=79.0.3945.36
 
