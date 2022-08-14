@@ -7,7 +7,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 ENV DISPLAY :20.0
 ENV SCREEN_GEOMETRY "1440x900x24"
 ENV CHROMEDRIVER_PORT 4444
-ENV CHROMEDRIVER_WHITELISTED_IPS ""
+ENV CHROMEDRIVER_WHITELISTED_IPS "172.17.0.1"
 ENV CHROMEDRIVER_URL_BASE ''
 ENV CHROMEDRIVER_VERBOSE ""
 ENV CHROME_BIN=/usr/bin/google-chrome
@@ -38,7 +38,7 @@ RUN apt-get -yqq update && \
 # Install Supervisor
 RUN pip install supervisor
 
-ARG CHROMEDRIVER_VERSION=94.0.4606.41
+ARG CHROMEDRIVER_VERSION=102.0.5005.27
 
 # Install Chrome WebDriver
 RUN mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION && \
@@ -49,12 +49,17 @@ RUN mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION && \
     ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/local/bin/chromedriver
 
 # Install Google Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+#   RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+RUN apt-get update && apt-get -y install google-chrome-stable
+
+# RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
 
 # Install Google Chrome
-#RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-#RUN apt-get -yqq update && apt-get -yqq install google-chrome-stable
+# RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# RUN apt-get -yqq update && apt-get -yqq install google-chrome-stable
 
 # Configure Supervisor
 ADD ./etc/supervisord.conf /etc/
